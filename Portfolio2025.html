@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jaideep Reddy Addula</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="./logo.jpeg" type="image/png" style="width: 30px;">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* CSS to ensure sections are visible below the fixed header */
+    section {
+      padding-top: 75px;
+      /* Adjust this value based on your navbar's height */
+      margin-top: -75px;
+      /* Counteract the padding to prevent extra space */
+    }
+
+    @keyframes slide-in {
+      0% {
+        transform: translateX(-200px);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .slide-in {
+      animation: slide-in 2s ease-out;
+    }
+
+    @keyframes fade {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .fade {
+      animation: fade 1s infinite;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 11ch
+      }
+
+      /* length of "I AM JAIDEEP" */
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        border-color: transparent
+      }
+
+      50% {
+        border-color: #05364d
+      }
+    }
+
+    .typing-effect {
+      overflow: hidden;
+      /* hide overflowing text */
+      white-space: nowrap;
+      /* single line */
+      border-right: 3px solid #05364d;
+      /* cursor */
+      animation:
+        typing 2s steps(11) forwards,
+        /* type text */
+        blink 0.7s step-end infinite;
+      /* blink cursor */
+      width: 11ch;
+      /* reserve space to prevent jumping */
+      display: inline-block;
+      box-sizing: content-box;
+    }
+
+    .typing-effect.finished {
+      border-right: none;
+      /* hide cursor after typing */
+      animation: typing 2s steps(11) forwards; /* Only keep the typing animation, remove blink */
+    }
+
+    /* Fix the width of greet container to prevent layout shift */
+    #greet {
+      /* Adjusted for responsiveness */
+      width: 100%;
+      /* Full width on small screens */
+      max-width: 400px;
+      /* Max width on larger screens */
+    }
+  </style>
+</head>
+
+<body class="m-0">
+
+  <div id="navbar" class="flex items-center justify-between sticky top-0 z-50 bg-white shadow-md py-2 md:py-0">
+    <div id="logo" class="w-[100px] h-[55px] relative slide-in md:w-[140px] md:h-[65px]">
+      <h1
+        class="w-full font-bold h-full text-white pt-2 text-xl text-center rounded-br-[25px] border-t-[12px] border-r-[12px] border-t-[#425ae3] border-r-[#9932c2] shadow-[3px_3px_6px_rgb(66,90,227)] bg-gradient-to-r from-blue-600 to-pink-500 md:pt-3 md:text-2xl md:rounded-br-[30px] md:border-t-[15px] md:border-r-[15px] md:shadow-[5px_5px_8px_rgb(66,90,227)]">
+        JD
+      </h1>
+    </div>
+
+    <button id="mobile-menu-button" class="md:hidden text-[#1d364d] text-2xl focus:outline-none pr-4">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="navcontents" class="hidden md:block md:pl-6">
+      <ul class="list-none flex space-x-4">
+        <li><a href="#home" class="text-pink-500 text-center px-2 py-1 no-underline md:px-4 md:py-2">Home</a></li>
+        <li><a href="#about"
+            class="text-[#1d364d] hover:text-pink-500 text-center px-2 py-1 no-underline md:px-4 md:py-2">About</a>
+        </li>
+        <li><a href="#skills"
+            class="text-[#1d364d] hover:text-pink-500 text-center px-2 py-1 no-underline md:px-4 md:py-2">Skills</a>
+        </li>
+        <li><a href="#projects"
+            class="text-[#1d364d] hover:text-pink-500 text-center px-2 py-1 no-underline md:px-4 md:py-2">Projects</a>
+        </li>
+        <li><a href="#internships"
+            class="text-[#1d364d] hover:text-pink-500 text-center px-2 py-1 no-underline md:px-4 md:py-2">Internships</a>
+        </li>
+        <li><a href="#certifications"
+            class="text-[#1d364d] hover:text-pink-500 text-center px-2 py-1 no-underline md:px-4 md:py-2">Certifications</a>
+        </li>
+        <li><a href="#contact"
+            class="text-[#1d364d] hover:text-pink-500 text-center px-2 py-1 no-underline md:px-4 md:py-2">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="mobile-menu-overlay"
+    class="fixed top-0 left-0 w-full h-full bg-white z-40 hidden flex-col items-center justify-center space-y-8 md:hidden">
+    <button id="close-mobile-menu" class="absolute top-4 right-4 text-[#1d364d] text-3xl focus:outline-none">
+      <i class="fas fa-times"></i>
+    </button>
+    <ul class="list-none flex flex-col items-center space-y-6 text-xl">
+      <li><a href="#home" class="text-pink-500 hover:text-blue-600" onclick="hideMobileMenu()">Home</a></li>
+      <li><a href="#about" class="text-[#1d364d] hover:text-pink-500" onclick="hideMobileMenu()">About</a></li>
+      <li><a href="#skills" class="text-[#1d364d] hover:text-pink-500" onclick="hideMobileMenu()">Skills</a></li>
+      <li><a href="#projects" class="text-[#1d364d] hover:text-pink-500" onclick="hideMobileMenu()">Projects</a></li>
+      <li><a href="#internships" class="text-[#1d364d] hover:text-pink-500" onclick="hideMobileMenu()">Internships</a>
+      </li>
+      <li><a href="#certifications" class="text-[#1d364d] hover:text-pink-500"
+          onclick="hideMobileMenu()">Certifications</a></li>
+      <li><a href="#contact" class="text-[#1d364d] hover:text-pink-500" onclick="hideMobileMenu()">Contact</a></li>
+    </ul>
+  </div>
+
+
+  <section id="home" class="flex flex-col-reverse items-center justify-around mt-[110px] px-4 md:flex-row">
+    <div id="greet" class="w-full text-center mt-10 md:w-[400px] md:text-left md:mt-0">
+      <h3 class="text-base font-normal mb-3 tracking-[1px] text-[#797979] md:text-[16px] md:mb-5 md:tracking-[2px]">HEY
+        THERE !</h3>
+      <h2 id="typingText"
+        class="typing-effect mt-3 text-4xl font-medium leading-[45px] mb-3 text-[#05364d] md:mt-5 md:text-[60px] md:leading-[60px] md:mb-5">
+        I AM JAIDEEP
+      </h2>
+
+      <h5 class="text-xl font-light mb-3 text-[#05364d] md:text-[24px] md:mb-5">ASPIRING SOFTWARE ENGINEER</h5>
+      <div id="links" class="flex justify-center gap-3 text-xl ms-1 mb-5 md:justify-start md:gap-4 md:text-2xl">
+        <a href="https://www.linkedin.com/in/jaideepreddyaddula/" class="cursor-pointer"><i
+            class="fa-brands fa-linkedin" style="color: #0076b5;"></i></a>
+        <a href="https://github.com/JaideepReddyAddula?tab=repositories" class="cursor-pointer"><i
+            class="fa-brands fa-square-github"></i></a>
+      </div>
+      <a href="#projects"
+      class="mt-4 inline-block bg-gradient-to-r from-blue-600 to-pink-500 text-white w-[130px] h-[35px] rounded-[8px] text-center leading-[35px] transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/70 md:w-[150px] md:h-[40px] md:rounded-[10px] md:leading-[40px]">
+      SEE MY WORK
+    </a>
+
+    </div>
+
+    <div id="abtcircle" class="
+          w-[250px]
+          h-[250px]
+          rounded-full
+          bg-gradient-to-r from-blue-600 to-pink-500
+          shadow-[inset_5px_5px_15px_rgba(255,255,255,0.2),inset_-5px_-5px_15px_rgba(0,0,0,0.2),0_0_20px_rgba(66,90,227,0.6)]
+          flex items-center justify-center overflow-hidden
+          mt-10 md:w-[350px] md:h-[350px] md:shadow-[inset_10px_10px_25px_rgba(255,255,255,0.2),inset_-10px_-10px_25px_rgba(0,0,0,0.2),0_0_40px_rgba(66,90,227,0.6)] md:mt-0
+        ">
+      <img src="/jd012.png" alt="Profile" class="w-[90%] h-[90%] object-cover rounded-full mt-10 md:mt-20" />
+    </div>
+  </section>
+
+  <section id="about" class="mt-[150px] flex flex-col items-center px-4">
+    <h2
+      class="text-3xl mt-10 font-serif text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-pink-400 md:text-[2.5rem] leading-tight">
+      ABOUT ME</h2>
+    <h2 class="mt-8 w-full text-base text-[#1d364d] text-justify md:mt-10 md:w-[75%] md:text-[18px]">Hello! My name
+      is Jaideep Reddy Addula. I am a
+      self-driven and enthusiastic Computer Science and Engineering graduate with a strong passion for Software
+      Development and Cloud Computing, where ideas are transformed into impactful interfaces. I enjoy dedicating time
+      to learning new technologies and continuously improving my skills. As a quick learner and team player, I am
+      always eager to upskill and stay updated with emerging technologies. In my free time, I enjoy playing video
+      games and badminton, which help me stay active and focused.
+
+    </h2>
+
+    <a href="resume.pdf" target="_blank"
+      class="mt-6 inline-block bg-gradient-to-r from-blue-600 to-pink-500 text-white w-[130px] h-[35px] rounded-[8px] text-center leading-[35px] transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/70 md:w-[150px] md:h-[40px] md:rounded-[10px] md:leading-[40px]">
+      View Resume
+    </a>
+
+  </section>
+
+
+  <section id="skills" class="flex flex-col items-center mt-[150px] px-4 justify-center">
+    <h2
+      class="text-3xl mt-10 font-serif text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-pink-400 text-center mb-8 md:text-[2.5rem] md:mb-10 leading-tight">
+      My Skills
+    </h2>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-center items-center">
+
+      <div class="w-[100px] h-[120px] flex flex-col items-center justify-between text-center md:w-[110px] md:h-[140px]">
+        <i class="fab fa-html5 text-[4rem] text-orange-500 fade md:text-[5rem]"></i>
+        <p class="text-sm font-semibold mt-1 md:text-[18px] md:mt-2">HTML</p>
+      </div>
+
+      <div class="w-[100px] h-[120px] flex flex-col items-center justify-between text-center md:w-[110px] md:h-[140px]">
+        <i class="fab fa-css3-alt text-[4rem] text-sky-400 fade md:text-[5rem]"></i>
+        <p class="text-sm font-semibold mt-1 md:text-[18px] md:mt-2">CSS</p>
+      </div>
+
+      <div class="w-[100px] h-[120px] flex flex-col items-center justify-between text-center md:w-[110px] md:h-[140px]">
+        <i class="fab fa-js text-[4rem] text-yellow-400 fade md:text-[5rem]"></i>
+        <p class="text-sm font-semibold mt-1 md:text-[18px] md:mt-2">JavaScript</p>
+      </div>
+
+      <div class="w-[100px] h-[120px] flex flex-col items-center justify-between text-center md:w-[110px] md:h-[140px]">
+        <img src="./tailwind.png" alt="Tailwind" class="w-[55px] h-[55px] fade object-contain md:w-[65px] md:h-[65px]" />
+        <p class="text-sm font-semibold mt-1 md:text-[18px] md:mt-2">Tailwind CSS</p>
+      </div>
+
+      <div class="w-[100px] h-[120px] flex flex-col items-center justify-between text-center md:w-[110px] md:h-[140px]">
+        <i class="fab fa-react text-[4rem] text-[#58c3db] fade md:text-[5rem]"></i>
+        <p class="text-sm font-semibold mt-1 md:text-[18px] md:mt-2">React</p>
+      </div>
+
+      <div class="w-[100px] h-[120px] flex flex-col items-center justify-between text-center md:w-[110px] md:h-[140px]">
+        <img src="./java.png" alt="Java" class="w-[55px] h-[95px] fade object-contain md:w-[65px] md:h-[105px]" />
+        <p class="text-sm font-semibold mt-1 md:text-[18px] md:mt-2">Java</p>
+      </div>
+
+      <div class="w-[100px] h-[120px] flex flex-col items-center justify-between text-center md:w-[110px] md:h-[140px]">
+        <img src="./springboot.jpg" alt="Spring Boot" class="w-[100px] h-[110px] fade object-contain md:w-[120px] md:h-[125px]" />
+        <p class="text-sm font-semibold mt-1 md:text-[18px] md:mt-2">Spring Boot</p>
+      </div>
+
+      <div class="w-[100px] h-[120px] flex flex-col items-center justify-between text-center md:w-[110px] md:h-[140px]">
+        <img src="./mysql.jpg" alt="MySQL" class="w-[55px] h-[95px] fade object-contain md:w-[65px] md:h-[105px]" />
+        <p class="text-sm font-semibold mt-1 md:text-[18px] md:mt-2">MySQL</p>
+      </div>
+
+      <div class="w-[100px] h-[120px] flex flex-col items-center justify-between text-center md:w-[110px] md:h-[140px]">
+        <img src="./python.png" alt="Python" class="w-[55px] h-[95px] fade object-contain md:w-[65px] md:h-[105px]" />
+        <p class="text-sm font-semibold mt-1 md:text-[18px] md:mt-2">Python</p>
+      </div>
+
+      <div class="w-[100px] h-[120px] flex flex-col items-center justify-between text-center md:w-[110px] md:h-[140px]">
+        <img src="./aws.png" alt="AWS" class="w-[55px] h-[95px] fade object-contain md:w-[65px] md:h-[105px]" />
+        <p class="text-sm font-semibold mt-1 md:text-[18px] md:mt-2">AWS</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section id="projects" class="flex flex-col items-center mt-[150px] px-4">
+    <h2
+      class="text-3xl mt-10 font-serif text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-pink-400 text-center mb-8 md:text-[2.5rem] md:mb-10 leading-tight">
+      My Projects
+    </h2>
+
+    <div class="w-full max-w-5xl space-y-8 md:space-y-10">
+
+      <div
+        class="border rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/70 cursor-pointer md:p-5">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-2">
+          <h3 class="text-xl font-semibold text-[#05364d] mb-2 md:mb-0 md:text-2xl">
+            FloraCart - React Web Application.
+          </h3>
+          <a href="https://floracart.netlify.app/" target="_blank"
+            class="text-white px-3 py-1 rounded-[6px] text-xs bg-gradient-to-r from-blue-600 to-pink-500 transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/70 md:px-4 md:py-1.5 md:rounded-[8px] md:text-sm">
+            View Project
+          </a>
+        </div>
+
+        <p class="text-xs text-gray-600 mb-2 md:text-sm">
+          Tech Stack: HTML, Tailwind CSS, JavaScript, React JS, JSON-Server based API's, Netlify, Render
+        </p>
+
+        <p class="text-sm text-[#1d364d] md:text-base">
+          Description: Developed a responsive flower eCommerce website that allows users to browse a variety of floral
+          products. Implemented user authentication, flower filtering, cart functionality and order confirmations using
+          EmailJS. Product and User data are handled via JSON-Server based APIs. The project's frontend is deployed on
+          Netlify and backend is deployed on render for fast and reliable hosting. This project demonstrates my ability
+          to build front-end applications with user interaction, state management, and deployment workflows.
+        </p>
+      </div>
+
+      <div
+        class="border rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/70 cursor-pointer md:p-5">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-2">
+          <h3 class="text-xl font-semibold text-[#05364d] mb-2 md:mb-0 md:text-2xl">
+            NextDo - FullStack Web Application.
+          </h3>
+          <a href="https://getnextdo.netlify.app/" target="_blank"
+            class="text-white px-3 py-1 rounded-[6px] text-xs bg-gradient-to-r from-blue-600 to-pink-500 transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/70 md:px-4 md:py-1.5 md:rounded-[8px] md:text-sm">
+            View Project
+          </a>
+        </div>
+
+        <p class="text-xs text-gray-600 mb-2 md:text-sm">
+          Tech Stack: HTML, Tailwind CSS, JavaScript, Java, Spring Boot, MySQL, Netlify, Railway, Render
+        </p>
+
+        <p class="text-sm text-[#1d364d] md:text-base">
+          Description: Developed a responsive and user-friendly Todo List application enabling task creation, updates,
+          deletion, and filtering based on priority and status. Deployed the frontend on Netlify, backend on Render,
+          and database on Railway cloud platforms to ensure high availability, and accessibility across devices.
+        </p>
+      </div>
+
+      <div
+        class="border rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/70 cursor-pointer md:p-5">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-2">
+          <h3 class="text-xl font-semibold text-[#05364d] mb-2 md:mb-0 md:text-2xl">
+            Products Management app - Web Application.
+          </h3>
+          <a href="https://jaideepreddyaddula.github.io/Products-Management-app/" target="_blank"
+            class="text-white px-3 py-1 rounded-[6px] text-xs bg-gradient-to-r from-blue-600 to-pink-500 transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/70 md:px-4 md:py-1.5 md:rounded-[8px] md:text-sm">
+            View Project
+          </a>
+        </div>
+
+        <p class="text-xs text-gray-600 mb-2 md:text-sm">
+          Tech Stack: HTML, CSS, JavaScript, JSON-Server based API's, Github Pages, Render
+        </p>
+
+        <p class="text-sm text-[#1d364d] md:text-base">
+          Description: Developed a web application for managing product data, enabling to add, update, and delete
+          products. It allows to edit the fields like price, discounts, stock availability, product images, name, and
+          specifications through user-friendly forms.
+        </p>
+      </div>
+
+
+    </div>
+  </section>
+
+  <section id="internships" class="flex flex-col items-center mt-[150px] px-4 justify-center">
+    <h2
+      class="text-3xl mt-10 font-serif text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-pink-400 text-center mb-8 md:text-[2.5rem] md:mb-10 leading-tight">
+      Internships
+    </h2>
+
+    <div class="w-full max-w-5xl space-y-8 md:space-y-10">
+
+      <div
+        class="border rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow duration-300 hover:shadow-blue-500/70 cursor-pointer bg-white md:p-5">
+        <div class="flex justify-between items-center mb-2">
+          <h3 class="text-lg font-semibold text-[#05364d] md:text-xl">Cloud Computing Intern (Remote)</h3>
+        </div>
+
+        <p class="text-xs text-gray-600 mb-2 md:text-sm">
+          infraBIM Techno Solutions • Mar 2023 – May 2023
+        </p>
+
+        <p class="text-xs text-[#05364d] mb-2 md:text-sm">
+          <span class="font-medium text-gray-700">Tech Stack:</span> AWS (Amazon Web Services)
+        </p>
+
+        <div class="text-xs text-gray-800 md:text-sm">
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Configured and launched Windows and Linux EC2 instances.</li>
+            <li>Deployed a static website on Windows and Linux EC2 from GitHub.</li>
+            <li>Managed and secured user accounts with AWS IAM, implementing role-based access control (RBAC).</li>
+            <li>Uploaded files in Amazon S3 and worked with Sage Maker.</li>
+            <li>Deployed a static website on Amazon S3.</li>
+            <li>Installed and configured Jenkins on AWS EC2.</li>
+            <li>Integrated GitHub with Jenkins and Implemented CI/CD for a simple web application using a Jenkins file.
+            </li>
+          </ul>
+
+          <p class="text-xs text-[#05364d] mt-2 font-medium text-gray-700 md:text-sm">View Certificates:</p><br>
+          <a href="https://s3.ap-south-1.amazonaws.com/infrabim.interns/Certificates/March/1029.pdf"
+            class="text-xs text-blue-600 hover:underline md:text-sm">https://s3.ap-south-1.amazonaws.com/infrabim.interns/Certificates/March/1029.pdf</a><br>
+
+          <a href="https://s3.ap-south-1.amazonaws.com/infrabim.interns/Certificates/May-2023/1029.pdf"
+            class="text-xs text-blue-600 hover:underline md:text-sm">https://s3.ap-south-1.amazonaws.com/infrabim.interns/Certificates/May-2023/1029.pdf</a>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+
+  <section id="certifications" class="flex flex-col items-center mt-[150px] px-4 justify-center">
+    <h2
+      class="text-3xl mt-10 font-serif text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-pink-400 text-center mb-8 md:text-[2.5rem] md:mb-10 leading-tight">
+      Certifications
+    </h2>
+
+    <div class="w-full max-w-5xl space-y-8 md:space-y-10">
+
+      <div
+        class="border rounded-xl p-4 shadow-md bg-white transition-shadow duration-300 hover:shadow-blue-500/70 hover:shadow-lg cursor-pointer md:p-5">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-2">
+          <h3 class="text-lg font-semibold text-[#05364d] mb-1 md:mb-0 md:text-xl">Java Full Stack</h3>
+          <a href="https://drive.google.com/file/d/1tKwjLqgu9hdIPx2Wpbsdoxm8iNOXcq7v/view?usp=drive_link"
+            class="text-white px-3 py-1 rounded-[6px] text-xs bg-gradient-to-r from-blue-600 to-pink-500 transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/70 md:px-4 md:py-1.5 md:rounded-[8px] md:text-sm">
+            View Certificate
+          </a>
+        </div>
+        <p class="text-xs text-gray-600 mb-1 md:text-sm">Issued by: Digital Edify Technologies • May 2025</p>
+        <p class="text-xs text-gray-600 mb-1 md:text-sm">Certificate No.: DL10895</p>
+
+      </div>
+
+      <div
+        class="border rounded-xl p-4 shadow-md bg-white transition-shadow duration-300 hover:shadow-blue-500/70 hover:shadow-lg cursor-pointer md:p-5">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-2">
+          <h3 class="text-lg font-semibold text-[#05364d] mb-1 md:mb-0 md:text-xl">HTML, CSS, JavaScript, React</h3>
+          <a href="https://www.udemy.com/certificate/UC-95c3e8b5-ffd3-4142-8f5a-2964c0579c50/"
+            class="text-white px-3 py-1 rounded-[6px] text-xs bg-gradient-to-r from-blue-600 to-pink-500 transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/70 md:px-4 md:py-1.5 md:rounded-[8px] md:text-sm">
+            View Certificate
+          </a>
+        </div>
+        <p class="text-xs text-gray-600 mb-1 md:text-sm">Issued by: Udemy • Apr 2025</p>
+        <p class="text-xs text-gray-600 mb-1 md:text-sm">Certificate No.: UC-95c3e8b5-ffd3-4142-8f5a-2964c0579c50</p>
+
+      </div>
+
+      <div
+        class="border rounded-xl p-4 shadow-md bg-white transition-shadow duration-300 hover:shadow-blue-500/70 hover:shadow-lg cursor-pointer md:p-5">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-2">
+          <h3 class="text-lg font-semibold text-[#05364d] mb-1 md:mb-0 md:text-xl">Data Analytics with Python</h3>
+          <a href="https://drive.google.com/file/d/1LgM4gmVYxalbzDVMTTaxHY_hJaDnxaXB/view?usp=drive_link"
+            class="text-white px-3 py-1 rounded-[6px] text-xs bg-gradient-to-r from-blue-600 to-pink-500 transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/70 md:px-4 md:py-1.5 md:rounded-[8px] md:text-sm">
+            View Certificate
+          </a>
+        </div>
+        <p class="text-xs text-gray-600 mb-1 md:text-sm">Issued by: NPTEL-IIT Roorkee • Apr 2023</p>
+        <p class="text-xs text-gray-600 mb-1 md:text-sm">Certificate No.: NPTEL23CS08563755845</p>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact" class="flex flex-col items-center justify-center mt-[150px] px-4">
+    <h2
+      class="text-3xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-pink-400 text-center mb-8 md:text-[2.5rem] md:mb-10 leading-tight">
+      Contact Me
+    </h2>
+
+    <form id="contact-form" class="w-full max-w-xl bg-white p-6 rounded-xl shadow-md space-y-5 md:space-y-6 md:p-8">
+      <div class="flex flex-col">
+        <label class="text-[#05364d] font-medium mb-1 text-sm md:text-base">Name</label>
+        <input type="text" name="user_name" required class="border border-gray-300 rounded-md px-3 py-2 text-sm md:px-4 md:py-2 md:text-base focus:outline-none" />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="text-[#05364d] font-medium mb-1 text-sm md:text-base">Email</label>
+        <input type="email" name="user_email" required class="border border-gray-300 rounded-md px-3 py-2 text-sm md:px-4 md:py-2 md:text-base focus:outline-none" />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="text-[#05364d] font-medium mb-1 text-sm md:text-base">Message</label>
+        <textarea name="message" rows="4" required class="border border-gray-300 rounded-md px-3 py-2 text-sm md:px-4 md:py-2 text-base focus:outline-none"></textarea>
+      </div>
+
+      <button type="submit"
+        class="w-fit px-5 py-2 bg-gradient-to-r from-blue-600 to-pink-500 text-white rounded-md transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/70 text-sm md:px-6 md:py-2 md:text-base">
+        Send Message
+      </button>
+    </form>
+  </section>
+
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    emailjs.init("H2C94h6i63OZ1NjXB"); // Replace with your EmailJS public key
+
+    document.addEventListener('DOMContentLoaded', () => {
+  const typingTextElement = document.getElementById('typingText');
+
+  // Listen for the 'animationend' event
+  typingTextElement.addEventListener('animationend', (event) => {
+    // Check if the completed animation is the 'typing' animation
+    if (event.animationName === 'typing') {
+      typingTextElement.classList.add('finished');
+    }
+  });
+});
+
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      emailjs.sendForm('service_evdbz0q', 'template_o8fvt7e', this)
+        .then(() => {
+          alert('Message sent successfully!');
+          this.reset();
+        }, (error) => {
+          alert('Failed to send message. Please try again.\\n' + JSON.stringify(error));
+        });
+    });
+
+    // Mobile Menu JavaScript
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const closeMobileMenu = document.getElementById('close-mobile-menu');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+    // MODIFIED mobileMenuButton event listener to toggle
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenuOverlay.classList.toggle('hidden'); // This toggles the hidden class
+      mobileMenuOverlay.classList.toggle('flex');  // This toggles the flex class
+    });
+
+    closeMobileMenu.addEventListener('click', () => {
+      mobileMenuOverlay.classList.add('hidden');
+      mobileMenuOverlay.classList.remove('flex');
+    });
+
+    function hideMobileMenu() {
+      mobileMenuOverlay.classList.add('hidden');
+      mobileMenuOverlay.classList.remove('flex');
+    }
+  </script>
+
+  <footer class="w-full bg-white text-center py-4 border-t mt-20 px-4">
+    <p class="text-xs text-gray-600 md:text-sm">
+      © 2025 Jaideep Reddy Addula. All rights reserved.
+    </p>
+  </footer>
+
+</body>
+
+</html>
